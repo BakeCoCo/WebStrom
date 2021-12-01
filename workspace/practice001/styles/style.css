@@ -1,0 +1,84 @@
+p {
+    color: red;
+    transition: all 0.5s ease;
+    border-radius: 0.1rem;
+    padding: 0.1rem;
+    transform: translate(+0%);
+}
+
+marquee {
+    color : blue;
+    width: 400px;
+    transition: all 0.5s ease;
+    transform: translate(+100%);
+    animation: dinosaurs 3s infinite linear;
+}
+strong {
+    font-size: 20px;
+}
+
+div {
+    display: flex;
+    justify-content: space-around;
+    font-size: 3rem;
+    text-align: center;
+    transition: all 0.5s ease;
+    border-radius: 0.1rem;
+    padding: 0.1rem;
+    transition: all 0.5s ease;
+}
+img {
+    transition: all 0.5s ease;
+}
+.pressed {
+    background: chartreuse;
+    transform: scale(2);
+}
+
+#include-html{
+    display: flex;
+    justify-content: space-between;
+}
+
+#dino {
+    transform: translate(+100%);
+    animation: dinosaurs 3s infinite linear;
+    transition: all 10s;
+}
+prev:hover, next:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@keyframes dinosaurs {
+    /*0% { transform: translate(-50%) rotate(-100deg); }*/
+    50% { transform: translate(-0%) rotate(360deg); }
+}
+
+#arin:hover {
+    width: 55%;
+    height: 50%;
+}
+table{
+
+}
+td {
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    border: 1px solid #dae1e6;
+    font: 25px bold;
+}
+
+.practice{
+    transition:all 0.5s ease-in;
+    height:0px;
+}
+
+.practice.loadHTML {
+    height: 300px;
+}
+
+section{
+    display: flex;
+}

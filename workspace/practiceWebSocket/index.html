@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket</title>
+    <script src="script/inputText.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/RPS.css">
+</head>
+<body>
+<div id="txtDiv">
+    <input type="button" value="가위" id="scissors">
+    <input type="button" value="바위" id="rock">
+    <input type="button" value="보" id="paper">
+    <br><br>
+    <table>
+        <tr>
+            <td colspan="4" style="font:35px bold" >인간 VS 컴퓨터 세기의 대결</td>
+            <td>10점 = Win</td>
+
+        </tr>
+        <tr>
+            <td>컴퓨터 : SCORE </td>
+            <td id="comScore">0</td>
+            <td>인간 : SCORE</td>
+            <td id="manScore">0</td>
+            <td rowspan="2" id="result" style="font-size: 30px;"> RESULT </td>
+        </tr>
+        <tr>
+            <td colspan="2" id="computer"><img id="computerimg" src="images/2.png" width="400" height="400"></td>
+            <td colspan="2" id="human"><img id="humanimg" src="images/1.png" width="400" height="400"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

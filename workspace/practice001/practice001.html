@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Practice001 Calcurator</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href="styles/calendar.css" rel="stylesheet" type="text/css">
+    <link href="styles/lotto.css" rel="stylesheet" type="text/css">
+    <script src="javascript/includeHTML.js"></script>
+    <script src="javascript/practice001.js"></script>
+    <script src="javascript/calendar.js"></script>
+    <script src="javascript/lotto.js"></script>
+</head>
+
+<body>
+<div id="include-html"><script>includeHTML();</script></div>
+
+
+<section class="preview">
+    <article>
+    <calcurator></calcurator>
+    </article>
+    <input id="pYear" type="button" onclick="btnYear(this.value)" value="<">
+    <article>
+        <table>
+            <tr>
+                <td colspan="4" class="year-month"></td>
+                <td><input type="button" id="PREV" value="PREV"></td>
+                <td class="loadMonth">Month</td>
+                <td><input type="button" id="NEXT" value="NEXT"></td>
+            </tr>
+            <tr>
+                <td class="SUN">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="SAT">토</td>
+            </tr>
+        </table>
+
+        <table class="calendarFrame"></table>
+
+    </article>
+    <input id="nYear" type="button" onclick="btnYear(this.value)" value=">">
+</section>
+
+<br>
+<div> <a href="#" id="lotto" style="font-size: 50px;"></a></div>
+<div> 로또 번호 1개씩 뽑기 </div>
+<input type="button" value="상위 9개 번호 뽑기" onclick="callLotto()" style="font-size: 50px">
+<div id="setLotto"></div>
+
+
+<table id="lottoRanking"></table>
+
+
+</body>
+
+</html>

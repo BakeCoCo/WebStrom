@@ -1,0 +1,13 @@
+#PREV, #NEXT, #TODAY{
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+}
+
+.SUN {
+    color: red;
+}
+
+.SAT {
+    color: blue;
+}

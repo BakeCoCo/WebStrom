@@ -1,0 +1,87 @@
+#header {
+    background-color:lightgrey;
+    height:100px;
+}
+#nav {
+    background-color:#339999;
+    color:white;
+    width:200px;
+    float:left;
+}
+#section {
+    width:200px;
+    text-align:left;
+    float:left;
+    padding:10px;
+}
+#footer {
+    background-color:#FFCC00;
+    height:100px;
+    clear:both;
+}
+
+#header, #nav, #section, #footer { text-align:center; }
+#header, #footer { line-height:100px; }
+#nav, #section { line-height:600px; }
+
+.star {
+    background-color: blue;
+    font-size: 20px;
+    top: 70px;
+    left: 90px;
+    animation-name: stars;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes stars {
+    0%,100% {transform:scale(0); opacity: 0;}
+    50% {transform: scale(1);opacity: 1;}
+}
+
+
+.memo {
+    -webkit-animation: fadeOut 4s 1s infinite linear alternate;
+    -moz-animation: fadeOut 4s 1s infinite linear alternate;
+    -ms-animation: fadeOut 4s 1s infinite linear alternate;
+    -o-animation: fadeOut 4s 1s infinite linear alternate;
+    animation: fadeOut 4s 1s infinite linear alternate;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@-moz-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@-ms-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@-o-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.fire {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}

@@ -1,0 +1,25 @@
+#lotNum {
+    color: blue;
+    width: 50px;
+}
+
+#lottoCount{
+    color: red;
+    width: 50px;
+}
+#rankNum {
+    font-size: 40px;
+    color: black;
+    width: 90px;
+}
+
+#rankCount {
+    font-size: 40px;
+    color: #0097e6;
+    width: 90px;
+}
+.callLotto {
+    font-size: 40px;
+    color: red;
+    width: 90px;
+}
