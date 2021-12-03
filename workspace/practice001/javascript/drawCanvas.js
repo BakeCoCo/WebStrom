@@ -1,72 +1,227 @@
-window.onload = function (){
-    const canvas = document.getElementById('canvas');
+let WB = true;
+let whiteScore = 0;
+let blackScore = 0;
+let oArr = new Array(15);
+for(let i=0; i<oArr.length; i++){
+    oArr[i] = new Array(15);
+}
+document.addEventListener('DOMContentLoaded',function(){
+    const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth - 15;
-    canvas.height = window.innerHeight - 15;
+    const victory = document.getElementById('victory');
+    nextTurn();
+    lineMake(canvas,ctx);
+    canvas.addEventListener('click',function(e){
+        let s = victory.getAttribute('style');
 
-    balls = [];
-    ballNumber = 1;
-
-    class Ball {
-        constructor(x, y){ // ball의 기본 속성들을 정의
-            this.x = x;
-            this.y = y;
-            this.c = 'rgba(' + Math.random() * 255 + ',' + Math.random() * 255 + ',' + Math.random() * 255 + ')'; // 공의 색깔을 random으로 설정
-            this.size = 10 + Math.random() * 20;
-            this.angle = (Math.random() * (Math.PI * 2));
-            this.power = Math.random() * 3 + 2;
-            this.directionX = this.power * Math.cos(this.angle);
-            this.directionY = this.power * Math.sin(this.angle);
-        }
-
-        update(){ // 프레임마다 속성들을 변화시킴
-            this.y += this.directionY;
-            this.x += this.directionX;
-            if (this.y + this.size > canvas.height || this.y - this.size < 0){ // 바운드 처리
-                this.directionY *= -1;
-            }
-            if (this.x > canvas.width - this.size){
-                this.x = canvas.width - this.size;
-                this.directionX *= -1;
-            } else if (this.x - this.size < 0){
-                this.directionX *= -1;
+        if(s==='visibility:hidden'){
+            console.log(s);
+            omok(e,canvas,ctx,oArr);
+        }else{
+            console.log(s);
+            if(confirm('더 하시겠습니까?')){
+                clearGame(oArr);
             }
         }
+    });
 
-        draw(){ // 넘어온 속성값대로 캔버스에 그림을 그려줌
-            ctx.fillStyle = this.c;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
-            ctx.closePath();
-            ctx.fill();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = 'black';
-            ctx.stroke();
-        }
+    canvas.setAttribute("style","background-color:");
+});
+
+function lineMake(canvas,ctx){
+    ctx.beginPath();
+    for(let i=0; i<16; i++){
+        let j = i*60;
+        ctx.moveTo(j,0);
+        ctx.lineTo(j,canvas.clientWidth);
+        ctx.stroke();
+    }
+    for(let i=0; i<16; i++){
+        let j = i*60;
+        ctx.moveTo(0,j);
+        ctx.lineTo(canvas.clientHeight,j);
+        ctx.stroke();
     }
 
-    function init(){ // 공의 갯수만큼 공의 객체 생성
-        for (i = 0; i < ballNumber; i++){
-            balls[i] = new Ball(canvas.width * 0.5, canvas.height * 0.5)
-        }
+}
+
+function omok(e,canvas,ctx,oArr){
+
+    let xx = Math.round(e.x/60);
+    let yy = Math.round(e.y/60);
+    xx = xx*60;
+    yy = yy*60;
+
+    if(!checkOmok(xx,yy,canvas,ctx,oArr)) return;
+
+    WB = !WB;
+    if(WB){
+        ctx.fillStyle = 'rgb(0,0,0)';
+    }else{
+        ctx.fillStyle = 'rgb(255,255,255)';
     }
 
-    function animate(){ // 매 프레임마다 벌어지는 일들
-        ctx.fillStyle = 'rgba(255,255,255,0.1)'; // 전체 화면 지우기. 하얀색의 alpha값을 변경함에 따라 공의 잔상이 달라진다.
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        for (i = 0; i < ballNumber; i++){
-            balls[i].update();
-            balls[i].draw();
-        }
-
-        window.addEventListener('resize', function (){ // 화면 크기가 변하면 캔버스 크기도 변경해줌
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        })
-        requestAnimationFrame(animate);
+    ctx.beginPath();
+    ctx.arc(xx, yy, 25, 0, Math.PI*2, true);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+    nextTurn();
+    drawArr(oArr);
+    victoryCheck(oArr);
+}
+function nextTurn(){
+    const turn = document.getElementById('turn');
+    if(WB){
+        turn.textContent = 'WHITE TURN';
+    }else{
+        turn.textContent = 'BLACK TURN';
+    }
+}
+function checkOmok(x,y,canvas,ctx,oArr){
+    if(x>900 || y>900 || x<60 || y<60){
+        return false;
+    }
+    x = (x-60)/60;
+    y = (y-60)/60;
+    if(oArr[y][x] > -1){
+        return false;
+    }
+    if(WB){
+        oArr[y][x] = 0;
+    }else{
+        oArr[y][x] = 1;
     }
 
-    init();
-    animate();
+    return true;
+}
 
+function victoryCheck(oArr){
+    let BW = 1;
+    if(!WB) BW=0;
+
+    for(let x=0; x<oArr.length; x++){
+        let garo = 0;
+        let sero = 0;
+        let dakak1 = 0;
+        let dakak2 = 0;
+        let dakak3 = 0;
+        let dakak4 = 0;
+
+        for(let y=0; y<oArr.length; y++){
+            //가로
+            if(oArr[x][y] === BW){
+                garo++;
+                if(garo===5){
+                    drawVictory();
+                }
+            }else {
+                garo=0;
+            }
+            //세로
+            if(oArr[y][x] === BW){
+                sero++;
+                if(sero===5){
+                    drawVictory();
+                }
+            }else {
+                sero=0;
+            }
+
+            if(x+y<15){
+                //대각선  \아래
+                if(oArr[x+y][y] === BW){
+                    dakak1++;
+                    if(dakak1===5){
+                        drawVictory();
+                    }
+                }else {
+                    dakak1=0;
+                }
+            }
+
+            if(y-x>=0){
+                // 대각선 \위에
+                if(oArr[y-x][y] === BW){
+                    dakak2++;
+                    if(dakak2===5){
+                        drawVictory();
+                    }
+                }else{
+                    dakak2=0;
+                }
+            }
+
+            if(x>=y){
+                // 대각선 /위에
+                if(oArr[x-y][y] === BW){
+                    dakak3++;
+                    if(dakak3===5){
+                        drawVictory();
+                    }
+                }else{
+                    dakak3=0;
+                }
+            }
+
+            if(x+y<15){
+                // 대각선 /아래
+                if(oArr[x+y][oArr.length-1-y] === BW){
+                    dakak4++;
+                    if(dakak4===5){
+                        drawVictory();
+                    }
+                }else{
+                    dakak4=0;
+                }
+            }
+        }
+    }
+}
+
+function drawArr(oArr){
+    const draw = document.getElementById("drawArr");
+
+    let k = "<table>";
+    for(let i=0; i<oArr.length; i++){
+        k += "<tr>";
+        for(let j=0; j<oArr.length; j++){
+            k += `<td>${oArr[i][j]}=i:${i},j:${j}</td>`;
+        }
+        k += "</tr>";
+    }
+    k += "</table>";
+
+    draw.innerHTML = k;
+}
+
+function drawVictory(){
+    const vic = document.getElementById('victory');
+    const score = document.getElementById('score');
+
+
+    vic.setAttribute('style','visibility:visible');
+
+    let  text = "WHITE WIN";
+    if(WB) {
+        text = "BLACK WIN"
+        blackScore++;
+    }else{
+        whiteScore++;
+    }
+    score.textContent = `BLACK : ${blackScore} \n WHITE : ${whiteScore}`;
+    vic.textContent = text;
+}
+
+function clearGame(){
+    const canvas =document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    const vic = document.getElementById('victory');
+
+    vic.setAttribute('style','visibility:hidden');
+    for(let i=0; i<oArr.length; i++){
+        oArr[i] = new Array(15);
+    }
+    ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+    lineMake(canvas,ctx);
 }

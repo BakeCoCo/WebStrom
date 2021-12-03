@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded",function (){
     build.innerHTML = input;
 
 
-    setInterval(every,2000);
+    //setInterval(every,2000);
 
 });
 

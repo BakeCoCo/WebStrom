@@ -1,0 +1,19 @@
+.myCanvas{
+    border: 3px solid black;
+}
+
+canvas {background : peru;}
+
+#victory {
+    position: absolute;left : 1000px; top:200px;
+    font-size: 60px;
+}
+#score {
+    position: absolute;left : 1000px; top:400px;
+    font-size: 60px;
+}
+
+#turn {
+    position: absolute;left : 1000px; top:100px;
+    font-size: 60px;
+}

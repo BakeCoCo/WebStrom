@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function(){
     lottoClick.addEventListener('click',setNum);
     let lottoMap = new Map();
     setInterval(ranNum,0,lottoMap);
+    setInterval(callLotto,5000);
 })
 
 function ranNum(lottoMap){
@@ -40,6 +41,7 @@ function ranNum(lottoMap){
 
     lottoRank.innerHTML = paintLotto;
 
+
 }
 function setNum(){
     let kk = document.getElementById('setLotto');
@@ -68,8 +70,13 @@ function callLotto(){
     let num = document.querySelectorAll('#rankNum');
     let lotNum = document.getElementById('setLotto');
     let setNum = '<table>';
-    for(let i=0; i<num.length; i++){
-        setNum += `<td class="callLotto">${num[i].textContent}</td>`;
+    for(let i=0; i<7; i++){
+        if(i===6){
+            setNum += `<td class="bonusNum">보너스 : ${num[i].textContent}</td>`;
+        }else{
+            setNum += `<td class="callLotto">${num[i].textContent}</td>`;
+        }
+
     }
     setNum += '</table>';
     lotNum.innerHTML = setNum;
