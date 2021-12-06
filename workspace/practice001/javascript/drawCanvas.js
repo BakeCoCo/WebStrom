@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded',function(){
         let s = victory.getAttribute('style');
 
         if(s==='visibility:hidden'){
-            console.log(s);
             omok(e,canvas,ctx,oArr);
         }else{
-            console.log(s);
             if(confirm('더 하시겠습니까?')){
                 clearGame(oArr);
             }
@@ -198,7 +196,10 @@ function drawArr(oArr){
 function drawVictory(){
     const vic = document.getElementById('victory');
     const score = document.getElementById('score');
-
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.font = '120px solid';
+    ctx.fillStyle = 'rgb(100,250,100)';
 
     vic.setAttribute('style','visibility:visible');
 
@@ -209,6 +210,7 @@ function drawVictory(){
     }else{
         whiteScore++;
     }
+    ctx.fillText(text,200,300);
     score.textContent = `BLACK : ${blackScore} \n WHITE : ${whiteScore}`;
     vic.textContent = text;
 }
