@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
         if(s==='visibility:hidden'){
             omok(e,canvas,ctx,oArr);
+
         }else{
             if(confirm('더 하시겠습니까?')){
                 clearGame(oArr);
@@ -44,9 +45,8 @@ function lineMake(canvas,ctx){
 }
 
 function omok(e,canvas,ctx,oArr){
-
-    let xx = Math.round(e.x/60);
-    let yy = Math.round(e.y/60);
+    let xx = Math.round(e.pageX/60);
+    let yy = Math.round(e.pageY/60);
     xx = xx*60;
     yy = yy*60;
 
@@ -65,7 +65,7 @@ function omok(e,canvas,ctx,oArr){
     ctx.fill();
     ctx.closePath();
     nextTurn();
-    //drawArr(oArr);
+    // drawArr(oArr);
     victoryCheck(oArr);
 }
 function nextTurn(){
