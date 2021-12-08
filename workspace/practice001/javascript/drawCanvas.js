@@ -65,7 +65,7 @@ function omok(e,canvas,ctx,oArr){
     ctx.fill();
     ctx.closePath();
     nextTurn();
-    drawArr(oArr);
+    //drawArr(oArr);
     victoryCheck(oArr);
 }
 function nextTurn(){
