@@ -7,7 +7,7 @@
 <body>
 <input type="button" id="button" value="click">
 <script>
-  const requestURL = '';
+  const requestURL = 'https://bakecoco.github.io/WebStrom/workspace/practice002/package.json';
   const button = document.getElementById('button');
   button.addEventListener('click', getData);
   function getData() {
