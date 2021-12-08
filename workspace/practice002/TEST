@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" id="button" value="click">
+<script>
+  const requestURL = '';
+  const button = document.getElementById('button');
+  button.addEventListener('click', getData);
+  function getData() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', requestURL);
+      xhr.onload = () => {
+          console.log(xhr.response);
+      };
+    xhr.send();
+  }
+</script>
+</body>
+</html>
